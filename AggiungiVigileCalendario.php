@@ -19,31 +19,6 @@
 		if( isset($_POST['anno']) ) {
 			$anno=$_POST['anno'];
 		}
-		// if ( isset($_POST['matricola']) ) {
-		// 	$matricola=$_POST['matricola'];
-		// 	if(!$conn = pg_connect("host=localhost port=5432 user=postgres password=root dbname=VVFF")) {die("Connessione fallita !<br>");}
-		// 	if ( isset($_POST['aggiungi']) ) {
-		// 		$query='SELECT public.f_aggiungi_vigile_turni_default(' . $squadra . ', ' . $matricola . ');';
-		// 		$operazione=$_POST['aggiungi'];
-		// 	}
-		// 	else if ( isset($_POST['rimuovi']) ) {
-		// 		$query='SELECT public.f_rimuovi_vigile_turni_default(' . $squadra . ', ' . $matricola . ');';
-		// 		$operazione=$_POST['rimuovi'];
-		// 	}
-		// 	$res = pg_exec($query);
-		// 	$nrows = pg_numrows($res);
-		// 	if($nrows == 0) die("Rows returned are 0!");
-		// 	while ($row = pg_fetch_array($res)) {
-		// 		if ($row[0]=true){
-		// 			// aggiungere alert per successo o fallimento inserimento nel turno
-		// 			echo '<h1>Opearzione ' . $operazione . ' eseguita con successo</h1>';
-		// 		}
-		// 		else {
-		// 			echo '<h1>Errore durante operazione ' . $operazione .'</h1>';
-		// 		}
-		// 	}
-		// 	pg_close($conn);
-		// }
 	?>
 
 	<div id="header">
@@ -60,7 +35,7 @@
 
 	<div id="content">
 		<div id="turno_attuale">
-						<table id="table_organico" width="100%" border="0" cellpadding="0" cellspacing="0">
+						<table id="table_organico" width="100%" border="1" cellpadding="0" cellspacing="0">
 						 <tr><th>Grado</th><th>Cognome</th><th>Nome</th><th>Matricola</th><th>Cercapersone</th></tr>
 						 <?php
 						 require "connect_db.php";
@@ -88,7 +63,7 @@
 										<input type="hidden" name="settimana" value="' . $settimana . '">
 										<input type="hidden" name="anno" value="' . $anno . '">
 										<input type="hidden" name="matricola" value="' . $row[3] . '">
-										<input type="submit" value="Aggiungi">
+										<input type="submit" class="button_table" value="Aggiungi">
 										</td>
 										<td><select id="cercapersone" name="cercapersone">';
                     $query_cp="SELECT * FROM (SELECT unnest(enum_range(NULL::public.cercapersone)) as cp

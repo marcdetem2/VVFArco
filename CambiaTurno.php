@@ -92,7 +92,6 @@
 					$query=$query . 'AND (oc.id_grado=4 OR oc.id_grado=5) ';
 				}
     		$query=$query . 'ORDER BY oc.id_grado, oc.cognome, oc.nome ASC;';
-        // echo $query;
   			$res = pg_exec($query);
   			$nrows = pg_numrows($res);
   			$ncols = pg_numfields($res);
@@ -106,7 +105,7 @@
                     <input type="hidden" name="settimana" value="' . $settimana . '">
                     <input type="hidden" name="matricola_old" value="' . $matricola . '">
                     <input type="hidden" name="matricola_new" value="' . $row[3] . '">
-                    <input type="submit" class="button" value="Cambia" ></form></td>';
+                    <input type="submit" class="button_table" value="Cambia" ></form></td>';
                 //     <td><select id="cercapersone" name="cercapersone">';
                 //     $query_cp='SELECT * FROM (SELECT unnest(enum_range(NULL::public.cercapersone)) as cp
                 //                 EXCEPT ALL

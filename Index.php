@@ -460,8 +460,9 @@
         <?php
         if( isset($_POST['mostra_dettagli_matricola']) ) {
           require "connect_db.php";
-          $query="SELECT ab.guida_emergenza, ab.patenteb, ab.patentec, ab.autoscala, ab.dae, ab.saf, ab.incidenti, ab.rimorchi, ab.daf, ab.trattore,
-          ab.gru, ab.muletto, ab.sgombraneve, ab.piattaforme_aeree, ab.motoseghe, ab.apvr
+          $query="SELECT ab.guida_emergenza, ab.patenteb, ab.patentec, ab.autoscala, ab.dae, ab.saf, ab.apvr,
+          ab.gru, ab.incidenti, ab.incendio, ab.mezzi_leggeri, ab.mezzi_pesanti, ab.trattore, ab.muletto, ab.sgombraneve,
+          ab.motoseghe, ab.rimorchi, ab.abi01, ab.abi02, ab.abi03
           FROM public.t_abilitazioni AS ab
           WHERE matricola=" . $_POST["mostra_dettagli_matricola"] . ";";
           $res = pg_exec($query);
@@ -479,16 +480,20 @@
           echo "Autoscala: " . $row[3] . "<br />";
           echo "DAE: " . $row[4] . "<br />";
           echo "SAF: " . $row[5] . "<br />";
-          echo "Incidenti: " . $row[6] . "<br />";
-          echo "Rimorchi: " . $row[7] . "<br />";
-          echo "DAF: " . $row[8] . "<br />";
-          echo "Trattore: " . $row[9] . "<br />";
-          echo "Gru: " . $row[10] . "<br />";
-          echo "Muletto: " . $row[11] . "<br />";
-          echo "Sgombraneve: " . $row[12] . "<br />";
-          echo "Piattaforme aeree: " . $row[13] . "<br />";
-          echo "Motoseghe: " . $row[14] . "<br />";
-          echo "APVR: " . $row[15] . "<br />";
+          echo "APVR: " . $row[6] . "<br />";
+          echo "Gru: " . $row[7] . "<br />";
+          echo "Incidenti: " . $row[8] . "<br />";
+          echo "Incendio: " . $row[9] . "<br />";
+          echo "Mezzi leggeri: " . $row[10] . "<br />";
+          echo "Mezzi pesanti: " . $row[11] . "<br />";
+          echo "Trattore: " . $row[12] . "<br />";
+          echo "Muletto: " . $row[13] . "<br />";
+          echo "Sgombraneve: " . $row[14] . "<br />";
+          echo "Motoseghe: " . $row[15] . "<br />";
+          echo "Rimorchi: " . $row[16] . "<br />";
+          echo "Abi01: " . $row[17] . "<br />";
+          echo "Abi02: " . $row[18] . "<br />";
+          echo "Abi03: " . $row[19] . "<br />";
         }
         ?>
       </div>

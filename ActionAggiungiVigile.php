@@ -72,7 +72,6 @@
 			$query=$query . "UPDATE public.t_squadre_default SET matricola=" . $_POST["matricola"] . " WHERE matricola=" . $_POST["matricola_old"] . ";";
 		}
 		$query=$query . "COMMIT;";
-		echo $query . '<br />';
 		echo '<h2>Vigile modificato</h2><br />';
 	}
 

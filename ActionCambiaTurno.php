@@ -1,4 +1,9 @@
 <html>
+<head>
+	<meta charset="UTF-8">
+	<title>Action Cambio turno</title>
+	<link rel="stylesheet" type="text/css" href="css/layout.css?v={random number/string}"/>
+</head>
 <body>
 	<?php
 	if( isset($_POST['admin']) ) {
@@ -13,7 +18,6 @@
 		SET matricola=' . $_POST['matricola_new'] . ', sostituito=TRUE
 		WHERE settimana=' . $_POST['settimana'] . ' AND anno=' . $_POST['anno'] . '
     	AND matricola=' . $_POST['matricola_old'] . ';';
-			// echo $query . '<br />';
 	$res = pg_exec($query);
 	pg_close($conn);
 	?>
