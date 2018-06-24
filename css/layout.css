@@ -67,7 +67,8 @@ body{
 
 .td_content{
 	height:30px;
-	text-indent:5px;
+	/* text-indent:5px; */
+	text-align: center;
 	/*color:#444;*/
    padding: 3px 3px;
 	border:1px solid #bbb;
