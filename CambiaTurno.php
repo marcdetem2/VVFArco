@@ -46,7 +46,18 @@
         $nome=$row[1];
         $grado=$row[2];
     }
-    echo "<h1>Sostituzione di: " . $cognome . " " . $nome . " in settimana: " . $settimana . " " . $anno . "</h1>";
+	
+	$query='SELECT patentec, autoscala FROM public.t_abilitazioni WHERE matricola=' . $matricola . ';';
+	$res = pg_exec($query);
+    $nrows = pg_numrows($res);
+    $ncols = pg_numfields($res);
+	
+	if($nrows == 0) die("Rows returned are 0!");
+    while ($row = pg_fetch_array($res)) {
+        $patc=$row[0];
+        $patscala=$row[1];
+    }
+	echo "<h1>Sostituzione di: " . $cognome . " " . $nome . " in settimana: " . $settimana . " " . $anno . "</h1>";
     pg_close($conn);
     ?>
 	</div>
@@ -66,8 +77,8 @@
   		<?php
 			require "connect_db.php";
 
-            $query='SELECT descrizione, cognome, nome, matricola ';
-    		$query=$query . 'FROM public.t_organico_corpo AS oc, public.t_gradi AS gr ';
+			$query='SELECT descrizione, cognome, nome, oc.matricola ';
+			$query=$query . 'FROM public.t_gradi AS gr, public.t_organico_corpo AS oc INNER JOIN public.t_abilitazioni AS ab ON oc.matricola=ab.matricola ';
     		$query=$query . 'WHERE NOT EXISTS ( SELECT 1 FROM public.t_calendario AS cal ';
     		$query=$query . 'WHERE settimana = ' . $settimana . ' ';
     		$query=$query . 'AND anno = ' . $anno . ' ';
@@ -91,8 +102,14 @@
 				if ($grado == 5) {
 					$query=$query . 'AND (oc.id_grado=4 OR oc.id_grado=5) ';
 				}
+				if ($patc == 'SI') {
+					$query=$query . "AND (ab.patentec='SI') ";
+				}
+				if ($patscala == 'SI') {
+					$query=$query . "AND (ab.autoscala='SI') ";
+				}
     		$query=$query . 'ORDER BY oc.id_grado, oc.cognome, oc.nome ASC;';
-  			$res = pg_exec($query);
+			$res = pg_exec($query);
   			$nrows = pg_numrows($res);
   			$ncols = pg_numfields($res);
 
