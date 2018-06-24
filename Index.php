@@ -417,7 +417,7 @@
 
     </div>
   </div>
-  <div id="more_content">
+  <!-- <div id="more_content">
     <form action="Index.php" method="post">
       <input type="hidden" name="admin" value="<?php echo $admin ?>">
       <input type="hidden" name="settimana" value='<?php echo $settimana ?>'>
@@ -497,7 +497,7 @@
         }
         ?>
       </div>
-    </div>
+    </div>  -->
     <div id="footer">
     </div>
 
