@@ -151,6 +151,10 @@ div {
 	float:right;
 	box-sizing: border-box;
 	border-right:2px solid #bbb;
+	/* overflow: auto; */
+}
+
+.abilitazioni_scroll {
 	overflow: auto;
 }
 

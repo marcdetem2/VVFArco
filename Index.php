@@ -285,72 +285,75 @@
       </table>
     </div>
     <div id="abilitazioni">
-      <table id="table_abilitazioni" class="content_table" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <th class="th_content">Guida Em</th>
-          <th class="th_content">Pat B</th>
-          <th class="th_content">Pat C</th>
-          <th class="th_content">Scala</th>
-          <th class="th_content">DAE</th>
-          <th class="th_content">SAF</th>
-          <th class="th_content">APVR</th>
-          <th class="th_content">Gru</th>
-          <th class="th_content">Incidenti</th>
-          <th class="th_content">Incendio</th>
-          <th class="th_content">Mezzi leggeri</th>
-          <th class="th_content">Mezzi pesanti</th>
-          <th class="th_content">Trattore</th>
-          <th class="th_content">Muletto</th>
-          <th class="th_content">Sgombraneve</th>
-          <th class="th_content">Motoseghe</th>
-          <th class="th_content">Rimorchi</th>
-          <th class="th_content">Abi01</th>
-          <th class="th_content">Abi02</th>
-          <th class="th_content">Abi03</th>
-          <th class="th_content">Ref01</th>
-          <th class="th_content">Ref02</th>
-          <th class="th_content">Ref03</th>
-          <th class="th_content">Ref04</th>
-          <th class="th_content">Ref05</th>
-          <th class="th_content">Ref06</th>
-        </tr>
-        <?php
-        require "connect_db.php";
-        $query="SELECT ab.guida_emergenza, ab.patenteb, ab.patentec, ab.autoscala, ab.dae, ab.saf, ab.apvr, ab.gru, ab.incidenti,
-        ab.incendio, ab.mezzi_leggeri, ab.mezzi_pesanti, ab.trattore, ab.muletto, ab.sgombraneve, ab.motoseghe, ab.rimorchi,
-        ab.abi01, ab.abi02, ab.abi03, ref.referenza01, ref.referenza02, ref.referenza03, ref.referenza04, ref.referenza05, ref.referenza06
-        FROM public.t_abilitazioni AS ab, public.t_calendario AS cal, public.t_referenze AS ref
-        WHERE ab.matricola=cal.matricola AND cal.matricola=ref.matricola
-        AND cal.settimana=" . $settimana . " AND cal.anno=" . $anno . "
-        ORDER BY NULLIF(cal.cp, '') ASC NULLS LAST;";
-        $res = pg_exec($query);
-        $nrows = pg_numrows($res);
-        $ncols = pg_numfields($res);
+		<div id="abilitazioni_sup" class="abilitazioni_scroll">
+		  <table id="table_abilitazioni" class="content_table" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+			  <th class="th_content">Guida Em</th>
+			  <th class="th_content">Pat B</th>
+			  <th class="th_content">Pat C</th>
+			  <th class="th_content">Scala</th>
+			  <th class="th_content">DAE</th>
+			  <th class="th_content">SAF</th>
+			  <th class="th_content">APVR</th>
+			  <th class="th_content">Gru</th>
+			  <th class="th_content">Incidenti</th>
+			  <th class="th_content">Incendio</th>
+			  <th class="th_content">Mezzi leggeri</th>
+			  <th class="th_content">Mezzi pesanti</th>
+			  <th class="th_content">Trattore</th>
+			  <th class="th_content">Muletto</th>
+			  <th class="th_content">Sgombraneve</th>
+			  <th class="th_content">Motoseghe</th>
+			  <th class="th_content">Rimorchi</th>
+			  <th class="th_content">Abi01</th>
+			  <th class="th_content">Abi02</th>
+			  <th class="th_content">Abi03</th>
+			  <th class="th_content">Ref01</th>
+			  <th class="th_content">Ref02</th>
+			  <th class="th_content">Ref03</th>
+			  <th class="th_content">Ref04</th>
+			  <th class="th_content">Ref05</th>
+			  <th class="th_content">Ref06</th>
+			</tr>
+			<?php
+			require "connect_db.php";
+			$query="SELECT ab.guida_emergenza, ab.patenteb, ab.patentec, ab.autoscala, ab.dae, ab.saf, ab.apvr, ab.gru, ab.incidenti,
+			ab.incendio, ab.mezzi_leggeri, ab.mezzi_pesanti, ab.trattore, ab.muletto, ab.sgombraneve, ab.motoseghe, ab.rimorchi,
+			ab.abi01, ab.abi02, ab.abi03, ref.referenza01, ref.referenza02, ref.referenza03, ref.referenza04, ref.referenza05, ref.referenza06
+			FROM public.t_abilitazioni AS ab, public.t_calendario AS cal, public.t_referenze AS ref
+			WHERE ab.matricola=cal.matricola AND cal.matricola=ref.matricola
+			AND cal.settimana=" . $settimana . " AND cal.anno=" . $anno . "
+			ORDER BY NULLIF(cal.cp, '') ASC NULLS LAST;";
+			$res = pg_exec($query);
+			$nrows = pg_numrows($res);
+			$ncols = pg_numfields($res);
 
-        if($nrows == 0) die("Rows returned are 0!");
-        while ($row = pg_fetch_array($res)) {
-          echo "<tr>";
-          for($i=0;$i<$ncols-6;$i++){
-            if ($row[$i] == "SI"){
-              echo '<td bgcolor="#00FF00" class="td_content">OK</td>';
-            }
-            else if ($row[$i] == "NO") {
-              echo '<td bgcolor="#FF0000" class="td_content">NO</td>';
-            }
-            else {
-              echo '<td bgcolor="#00FFFF" class="td_content">AFF</td>';
-            }
-          }
-          for($i=$ncols-6;$i<$ncols;$i++){
-            echo '<td class="td_content">' . $row[$i] . '</td>';
-          }
-          echo "</tr>";
-        }
-        pg_close($conn);
-        ?>
-      </table>
+			if($nrows == 0) die("Rows returned are 0!");
+			while ($row = pg_fetch_array($res)) {
+			  echo "<tr>";
+			  for($i=0;$i<$ncols-6;$i++){
+				if ($row[$i] == "SI"){
+				  echo '<td bgcolor="#00FF00" class="td_content">OK</td>';
+				}
+				else if ($row[$i] == "NO") {
+				  echo '<td bgcolor="#FF0000" class="td_content">NO</td>';
+				}
+				else {
+				  echo '<td bgcolor="#00FFFF" class="td_content">AFF</td>';
+				}
+			  }
+			  for($i=$ncols-6;$i<$ncols;$i++){
+				echo '<td class="td_content">' . $row[$i] . '</td>';
+			  }
+			  echo "</tr>";
+			}
+			pg_close($conn);
+			?>
+		  </table>
+		</div>
       <br />
       <h2>CERCAPERSONE FISSI</h2>
+	  <div id="abilitazioni_inf" class="abilitazioni_scroll">
       <table id="table_abilitazioni" class="content_table" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <th class="th_content">Guida Em</th>
@@ -414,6 +417,7 @@
         pg_close($conn);
         ?>
       </table>
+	  </div>
 
     </div>
   </div>
