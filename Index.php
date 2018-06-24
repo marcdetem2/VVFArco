@@ -187,6 +187,7 @@
     }
     ?>
     <div id="vigili_calendario">
+	<div class="abilitazioni_scroll">
       <table id="table_vigili_calendario" class="content_table" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <th class="th_content">Cambia</th>
@@ -244,8 +245,10 @@
         pg_close($conn);
         ?>
       </table>
+	  </div>
       <br />
       <h2>CERCAPERSONE FISSI</h2>
+	  <div class="abilitazioni_scroll">
       <table id="table_vigili_calendario" class="content_table" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <th class="th_content">N°</th>
@@ -283,6 +286,7 @@
         echo "</tr>";
         ?>
       </table>
+	  </div>
     </div>
     <div id="abilitazioni">
 		<div id="abilitazioni_sup" class="abilitazioni_scroll">
