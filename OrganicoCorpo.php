@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/layout.css?v={random number/string}"/>
+  <link rel="stylesheet" type="text/css" href="css/layout.css?v={random number/string}"/>
+  <link rel="stylesheet" href="css/fixed-table.css">
+	<script src="js/fixed-table.js"></script>
 	<title>Turni Default</title>
 	<style>
       .scroll{
@@ -87,31 +89,17 @@
           }
           ?>
       </table>
-		</div>
-    <div id="organico_corpo_DX">
-      <table id="table_organico_corpo" width="100%" border="1" cellpadding="0" cellspacing="0">
-  			<tr>
+    </div>
+    <div id="fixed-table" class="fixed-table-container">
+    <table id="table_organico_corpo" width="100%" border="1" cellpadding="0" cellspacing="0">
+      <thead>
+  		<tr>
         <?php
+        // if ($admin == "true")
+        // {
+        //   echo '<th class="th_content">Modifica</th>';
+        // }
         if ($admin == "true")
-        {
-          echo '<th class="th_content">Modifica</th>';
-        }
-        ?>
-        <th class="th_content">Cognome</th>
-        <th class="th_content">Nome</th>
-      </tr>
-			<?php
-			require "connect_db.php";
-			$query="SELECT oc.cognome, oc.nome, oc.matricola, oc.id_grado
-							FROM public.t_organico_corpo as oc
-    					ORDER BY id_grado, cognome, nome;";
-			$res = pg_exec($query);
-			$nrows = pg_numrows($res);
-			$ncols = pg_numfields($res);
-			if($nrows != 0) {
-				while ($row = pg_fetch_array($res)) {
-					echo "<tr>";
-          if ($admin == "true")
           {
 					echo '<td class="td_content"><form action="AggiungiVigile.php" method="post">
 					<input type="hidden" name="admin" value="' . $admin . '">
@@ -119,20 +107,9 @@
 					<input type="hidden" name="azione" value="modifica">
 						<input type="submit" class="button_table" value="Modifica"></form></td>';
           }
-          echo '<td class="td_content">' . $row['cognome'] . "</td>";
-          echo '<td class="td_content">' . $row['nome'] . "</td>";
-					echo "</tr>";
-				}
-			}
-			pg_close($conn);
-			?>
-		</table>
+        ?>
+        <th class="th_content">Vigile</th>
 
-    </div>
-    <div id="organico_corpo_SX">
-		<table id="table_organico_corpo" width="100%" border="1" cellpadding="0" cellspacing="0">
-			<thead>
-			<tr>
         <th class="th_content">Matricola</th>
 				<th class="th_content">Grado</th>
 				<th class="th_content">Cellulare</th>
@@ -175,11 +152,13 @@
         <th class="th_content">Referenza04</th>
         <th class="th_content">Referenza05</th>
         <th class="th_content">Referenza06</th>
-			</tr>
-			</thead>
+      </tr>
+      <thead>
+      <tbody>
 			<?php
 			require "connect_db.php";
-			$query="SELECT oc.matricola, gr.descrizione, oc.tel_cellulare, oc.breve_cellulare, oc.tel_casa, oc.breve_casa, oc.tel_lavoro, oc.breve_lavoro, oc.tel_servizio,
+			$query="SELECT oc.cognome, oc.nome,
+                      oc.matricola, gr.descrizione, oc.tel_cellulare, oc.breve_cellulare, oc.tel_casa, oc.breve_casa, oc.tel_lavoro, oc.breve_lavoro, oc.tel_servizio,
 											oc.breve_servizio, oc.indirizzo_casa, oc.assunzione, oc.mansione, oc.email,
                       ab.guida_emergenza, ab.patenteb, ab.patentec, ab.autoscala, ab.dae, ab.saf, ab.apvr, ab.gru, ab.incidenti,
 	                    ab.incendio, ab.mezzi_leggeri, ab.mezzi_pesanti, ab.trattore, ab.muletto, ab.sgombraneve, ab.motoseghe, ab.rimorchi,
@@ -189,16 +168,23 @@
 							AND oc.matricola=ab.matricola
               AND oc.matricola=ref.matricola
     					ORDER BY id_grado, cognome, nome;";
-
 			$res = pg_exec($query);
 			$nrows = pg_numrows($res);
 			$ncols = pg_numfields($res);
-			echo '<tbody  style="overflow-y: auto">';
 			if($nrows != 0) {
 				while ($row = pg_fetch_array($res)) {
 					echo "<tr>";
-					for($i=0;$i<$ncols;$i++){
-						if ($i == 11) {
+          if ($admin == "true")
+          {
+					echo '<td class="td_content"><form action="AggiungiVigile.php" method="post">
+					<input type="hidden" name="admin" value="' . $admin . '">
+					<input type="hidden" name="matricola" value="' . $row['matricola'] . '">
+					<input type="hidden" name="azione" value="modifica">
+						<input type="submit" class="button_table" value="Modifica"></form></td>';
+          }
+          echo '<td class="td_content">' . $row['cognome'] . " " . $row['nome'] . "</td>";
+          for($i=2;$i<$ncols;$i++){
+						if ($i == 13) {
 							list($year, $month, $day) = explode('-', $row[$i]);
 							$time = mktime(0, 0, 0, $month, $day, $year);
 							$assunzione = date('d-m-Y', $time);
@@ -223,10 +209,14 @@
 				}
 			}
 			pg_close($conn);
-			echo "</tbody>";
 			?>
+      </tbody>
 		</table>
-	</div>
+  </div>
+  </div>
+  <script >
+    var fixedTable = fixTable(document.getElementById('fixed-table'));
+  </script>
 
 	<div id="more_content">
 

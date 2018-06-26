@@ -80,6 +80,37 @@ body{
     min-width:100px;
 }
 
+/* table {
+	position: relative;
+	overflow: hidden;
+	border-collapse: collapse;
+  }
+  
+  
+
+  thead {
+	position: relative;
+	display: block; 
+	overflow: visible;
+  }
+  
+  thead th:nth-child(1) {
+	position: relative;
+	display: block; 
+	background-color: #88b;
+  }
+  
+  tbody {
+	position: relative;
+	display: block; 
+	overflow: scroll;
+  }
+  
+  tbody tr td:nth-child(1) {
+	position: relative;
+	display: block;
+  } */
+
 div {
 	border-radius: 5px;
 }
@@ -124,22 +155,6 @@ div {
 #vigili_calendario {
 	width:35%;
 	float:left;
-	box-sizing: border-box;
-	border-right:2px solid #bbb;
-	/* overflow: auto; */
-}
-
-#organico_corpo_DX {
-	width:20%;
-	float:left;
-	box-sizing: border-box;
-	border-right:2px solid #bbb;
-	/* overflow: auto; */
-}
-
-#organico_corpo_SX {
-	width:80%;
-	float:right;
 	box-sizing: border-box;
 	border-right:2px solid #bbb;
 	/* overflow: auto; */
