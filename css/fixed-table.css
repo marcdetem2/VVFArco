@@ -1,7 +1,7 @@
 .fixed-table-container {
-  height: 300px;
+  height: 500px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   margin-bottom: 40px;
 }
 .fixed-table-container table {
@@ -10,11 +10,11 @@
 }
 .fixed-table-container th,
 .fixed-table-container td {
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
   padding: 8px;
-  text-align: left;
-  vertical-align: top;
+  text-align: center;
+  vertical-align: center;
 
   /**
     * Current implementation doesn't work when
@@ -22,15 +22,9 @@
     */
   white-space: nowrap !important;
 }
-.fixed-table-container th {
-  background: #eee;
-  font-size: 12px;
-  line-height: 16px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
+
 .fixed-table-container td:first-child {
-  background: #eee;
+  background: #ff6565;
 }
 .fixed-table-container tr:last-child td {
   border-bottom: 0;

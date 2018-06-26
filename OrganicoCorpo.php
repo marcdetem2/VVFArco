@@ -95,18 +95,10 @@
       <thead>
   		<tr>
         <?php
-        // if ($admin == "true")
-        // {
-        //   echo '<th class="th_content">Modifica</th>';
-        // }
         if ($admin == "true")
-          {
-					echo '<td class="td_content"><form action="AggiungiVigile.php" method="post">
-					<input type="hidden" name="admin" value="' . $admin . '">
-					<input type="hidden" name="matricola" value="' . $row['matricola'] . '">
-					<input type="hidden" name="azione" value="modifica">
-						<input type="submit" class="button_table" value="Modifica"></form></td>';
-          }
+        {
+          echo '<th class="th_content">Modifica</th>';
+        }
         ?>
         <th class="th_content">Vigile</th>
 
