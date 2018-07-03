@@ -61,7 +61,9 @@ function fixTable(container) {
     }, 0);
     tbody.style.display = 'block';
     tbody.style.width = totalWidth + 'px';
-    thead.style.width = totalWidth - thStyles[0].boundingWidth + 'px';
+    //thead.style.width = totalWidth - thStyles[0].boundingWidth + 'px';
+	thead.style.width = totalWidth - thStyles[0].boundingWidth - 14 + 'px';
+
 
     // Position thead
     thead.style.position = 'absolute';
